@@ -15,7 +15,63 @@
     </ul>
   </form>
 <script>
+
 const endpoint = 'https://gist.githubusercontent.com/Miserlou/c5cd8364bf9b2420bb29/raw/2bf258763cdddd704f8ffd3ea9a3e81d25e2c6f6/cities.json';
+
+const cities = [];
+
+fetch(endpoint)
+  .then(response => response.json())
+  .then(j => cities.push(...j));
+
+function addCommas(number) {
+  const numLength = number.length;
+  if (numLength <= 3 || number.match(/[^0-9]/)) return number;
+  let i = numLength % 3 == 0 ? 3 : numLength % 3;
+  let numberWithCommas = '';
+  numberWithCommas += number.slice(0, i);
+  while (i < numLength) {
+    numberWithCommas += ',';
+    numberWithCommas += number.slice(i, i + 3);
+    i += 3;
+  }
+  return numberWithCommas;
+}
+
+console.log(addCommas("sdafsdafsdaf"));
+console.log(addCommas("sdafsdafsd675af"));
+console.log(addCommas("135345"));
+
+console.log("sdafsdafsdaf".match(/[^0-9]/));
+console.log("sdafsdafsd675af".match(/[^0-9]/));
+console.log("135345".match(/[^0-9]/));
+
+function displayMatches() {
+  const matches = findMatches(this.value, cities);
+  var matchList = matches.map(c => {
+    const regex = new RegExp(this.value, 'gi');
+    const city = c.city.replace(regex, `<span class="hl">${this.value}</span>`);
+    const state = c.state.replace(regex, `<span class="hl">${this.value}</span>`);
+    return `<li>
+              <span>${city}, ${state}</span>
+              <span class="population">${addCommas(c.population)}</span>
+            </li>`;
+  }).join('');
+  suggestionList.innerHTML = matchList;
+}
+
+function findMatches(matchValue, cities) {
+  return cities.filter(c => {
+    const regex = new RegExp(matchValue, 'gi');
+    return c.city.match(regex) || c.state.match(regex);
+  });
+}
+
+const searchBox = document.querySelector('.search');
+const suggestionList = document.querySelector('.suggestions');
+
+searchBox.addEventListener('change', displayMatches);
+searchBox.addEventListener('keyup', displayMatches);
 
 </script>
   </body>
