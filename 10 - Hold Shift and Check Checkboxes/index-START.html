@@ -104,6 +104,64 @@
   </div>
 
 <script>
+
+
+// Wes' code is much simpler, but has what I consider a bug.
+// If a user checks and then unchecks a chechbox and then shift-clicks a box,
+// the shift-clicked box will count as the second box and the unchecked box will count as the first box 
+// and all boxes in between will be checked.
+// e.g.: 
+// box 1 is checked and unchecked
+// box 5 is shift-clicked
+// boxes 1-4 are now checked
+
+// I solved this by keeping track of checked boxes in a stack
+
+let lastClickedStack = [];
+const checkboxes = document.querySelectorAll('input');
+
+//better
+// const checkboxes = document.querySelectorAll('.inbox input[type="checkbox"]')
+
+function shiftChecker(e) {
+  if (this.checked) {
+    if (e.shiftKey && lastClickedStack.length) {
+
+      let checking = false;
+      checkboxes.forEach(c => {
+        if (c === this || c === lastClickedStack[lastClickedStack.length - 1]) {
+          checking = !checking;
+        }
+        if (checking) {
+          c.checked = true;
+        }
+      });
+
+      // let thisIndex = getIndex(this);
+      // let lastClickedIndex = getIndex(lastClickedStack[lastClickedStack.length - 1]);
+      // let minIndex = Math.min(lastClickedIndex, thisIndex);
+      // let maxIndex = Math.max(lastClickedIndex, thisIndex);
+      // for (let i = minIndex + 1; i < maxIndex; i++) {
+      //   checkboxes[i].checked = true;
+      // }
+    }
+    lastClickedStack.push(this);
+  }
+
+  // only pop the element from the stack if it's on the stack in the first place
+  else if (this === lastClickedStack[lastClickedStack.length - 1]) {
+    lastClickedStack.pop();
+  }
+}
+
+function getIndex(checkbox) {
+  for (let i = 0; i < checkboxes.length; i++) {
+    if (checkboxes[i] === checkbox) return i;
+  }
+}
+
+checkboxes.forEach(c => c.addEventListener('click', shiftChecker));
+
 </script>
 </body>
 </html>

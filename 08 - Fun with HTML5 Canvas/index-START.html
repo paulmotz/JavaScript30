@@ -13,35 +13,57 @@ const ctx = canvas.getContext('2d');
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
 
+// const minHue = 30;
+// const maxHue = 60;
+const minHue = 10;
+const maxHue = 200;
+
+const minWidth = 20;
+const maxWidth = 25;
+
+const hueLoop = true;
+let hue = minHue;
+let hueChange = 1;
+let widthChange = 1;
+
 ctx.lineJoin = 'round';
 ctx.lineCap = 'round';
-ctx.lineWidth = 15;
+ctx.lineWidth = minWidth;
 // ctx.globalCompositeOperation = 'multiply';
+// ctx.globalCompositeOperation = 'xor';
 
 let isDrawing = false;
 let lastX = 0;
 let lastY = 0;
-let hue = 0;
-let increasing = 1;
-
-const minWidth = 25;
-const maxWidth = 25;
 
 function draw(e) {
 
 	if (!isDrawing) return;
-	ctx.strokeStyle = `hsl(${hue}, 100%, 50%)`;
-	hue++;
+	ctx.strokeStyle = `hsl(${hue}, 90%, 70%)`;
 	ctx.beginPath();
 	ctx.moveTo(lastX, lastY);
 	ctx.lineTo(e.offsetX, e.offsetY);
 	ctx.stroke();
 	[lastX, lastY] = [e.offsetX, e.offsetY];
 
-	if (ctx.lineWidth >= maxWidth || ctx.lineWidth <= minWidth) {
-		increasing *= -1;
+	if (hueLoop) {
+		if (hue >= maxHue) {
+			hueChange = -Math.abs(hueChange);
+		}
+		if (hue <= minHue) {
+			hueChange = Math.abs(hueChange);
+		}
 	}
-	ctx.lineWidth += increasing;
+	else if (hue >= maxHue) hue = minHue;
+	hue += hueChange;
+
+	if (ctx.lineWidth >= maxWidth) {
+		widthChange = -Math.abs(widthChange);
+	} 
+	if (ctx.lineWidth <= minWidth) {
+		widthChange = Math.abs(widthChange);
+	}
+	ctx.lineWidth += widthChange;
 }
 
 
