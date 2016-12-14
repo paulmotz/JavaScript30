@@ -64,8 +64,6 @@ TODO: I plan on adding a full screen button
 
 ## 12 - Key Sequence Detection
 
-...yet another challenge that does not like Safari
-
 My implementation allows multiple words and adds some *fabulous* details
 
 ## 13 - Slide in on Scroll

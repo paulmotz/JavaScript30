@@ -14,9 +14,9 @@ const codeWords = ['unicorn', 'rainbow'];
 const codeWordsLength = codeWords[0].length;
 
 document.addEventListener('keyup', (e) => {
-	keysPressed.push(e.key);
+	keysPressed.push(e.key ? e.key : String.fromCharCode(e.keyCode));
 	keysPressed.splice(-codeWordsLength - 1, keysPressed.length - codeWordsLength);
-	if (codeWords.includes(keysPressed.join(''))) {
+	if (codeWords.includes(keysPressed.join('').toLowerCase())) {
 		cornify_add();
 	}
 });
