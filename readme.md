@@ -10,6 +10,8 @@ These are my implementations of Wes Bos' [https://JavaScript30.com](https://Java
 
 Users can click to play a certain sound rather than just using the keyboard.
 
+Playback of sounds doesn't reset current playback in Safari.
+
 ## 2 - JS + CSS Clock
 
 I made every hand on the clock look unique. I also fixed a bug in the version of the code that I forked.
@@ -17,6 +19,8 @@ I made every hand on the clock look unique. I also fixed a bug in the version of
 ## 3 - CSS Variables
 
 No changes (yet).
+
+Safari does not support a pretty color picker
 
 ## 4 - Array Cardio Day 1
 
@@ -29,6 +33,8 @@ No changes (yet).
 ## 6 - Type Ahead
 
 No changes (yet).
+
+Does not work in Safari since it does not support fetch.
 
 ## 7 - Array Cardio Day 2
 
@@ -58,7 +64,9 @@ TODO: I plan on adding a full screen button
 
 ## 12 - Key Sequence Detection
 
-To be completed
+...yet another challenge that does not like Safari
+
+My implementation allows multiple words and adds some *fabulous* details
 
 ## 13 - Slide in on Scroll
 

@@ -6,7 +6,39 @@
   <script type="text/javascript" src="http://www.cornify.com/js/cornify.js"></script>
 </head>
 <body>
+	<p>Type special words to make <span class="special">unicorn</span>s and <span class="special">rainbow</span>s appear!</p>
 <script>
+
+const keysPressed = [];
+const codeWords = ['unicorn', 'rainbow'];
+const codeWordsLength = codeWords[0].length;
+
+document.addEventListener('keyup', (e) => {
+	keysPressed.push(e.key);
+	keysPressed.splice(-codeWordsLength - 1, keysPressed.length - codeWordsLength);
+	if (codeWords.includes(keysPressed.join(''))) {
+		cornify_add();
+	}
+});
+
 </script>
+<style>
+	body {
+		background: linear-gradient(90deg, red 0%, orange 20%, yellow 40%, green 60%, blue 80%, purple 100%);
+		background-repeat: no-repeat;
+    	background-attachment: fixed;
+	}
+
+	p {
+		color: rgb(255, 0, 255);
+		text-align: center;
+		margin-top: 50px;
+		font-size: 24px;
+		font-family: "Comic Sans MS", cursive, sans-serif;
+	}
+	.special {
+		text-transform: uppercase;
+	}
+</style>
 </body>
 </html>
