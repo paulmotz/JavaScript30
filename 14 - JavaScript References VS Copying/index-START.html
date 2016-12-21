@@ -8,6 +8,19 @@
 
   <script>
     // start with strings, numbers and booleans
+    // let x = 0;
+    // let y = x;
+    // console.log(x, y);
+
+    // x = 1;
+    // console.log(x, y);
+
+    // let a = "Hi";
+    // let b = a;
+    // console.log(a, b);
+
+    // a = "Bye";
+    // console.log(a, b);
 
     // Let's say we have an array
     const players = ['Wes', 'Sarah', 'Ryan', 'Poppy'];
@@ -15,8 +28,13 @@
     // and we want to make a copy of it.
 
     // You might think we can just do something like this:
+    const team = players;
+    // console.log(players, team);
 
     // however what happens when we update that array?
+    players[0] = 'Paul';
+    // console.log(players, team);
+    // console.log(players[0] === team[0]);
 
     // now here is the problem!
 
@@ -25,22 +43,42 @@
     // Why? It's because that is an array reference, not an array copy. They both point to the same array!
 
     // So, how do we fix this? We take a copy instead!
+    const team2 = players.slice();
 
     // one day
 
     // or create a new array and concat the old one in
 
+    const team3 = [].concat(players);
+
     // or use the new ES6 Spread
+    const team4 = [...players]
+    const team5 = Array.from(players);
+
+    players[0] = 'PJM';
+    // console.log(players, team, team2, team3, team4, team5);;
 
     // now when we update it, the original one isn't changed
 
     // The same thing goes for objects, let's say we have a person object
+    const person = {
+        name: 'Paul',
+        age: 26
+    }    
 
     // with Objects
 
     // and think we make a copy:
 
+    const captain = person;
+    // captain.number = 28;
+
+    console.log(person);
+
     // how do we take a copy instead?
+
+    const cap2 = Object.assign({}, person, {number: 28});
+    console.log(person);
 
     // We will hopefully soon see the object ...spread
 

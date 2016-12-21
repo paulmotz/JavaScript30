@@ -72,23 +72,23 @@ To be completed
 
 ## 14 - JavaScript References VS Copying
 
-To be completed
+No changes as this was an instructional step.
 
 ## 15 - LocalStorage
 
-To be completed
+I added buttons to remove all items from local storage and to check/uncheck all items
 
 ## 16 - Mouse Move Shadow
 
-To be completed
+Changed colors and position but no non cosmetic changes made
 
 ## 17 - Sort Without Articles
 
-To be completed
+Now works with Safari (solution does not)
 
 ## 18 - Adding Up Times with Reduce
 
-To be completed
+Completed
 
 ## 19 - Webcam Fun
 
