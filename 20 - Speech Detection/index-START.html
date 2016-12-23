@@ -12,6 +12,35 @@
 <script>
   window.SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
 
+  const recognition = new SpeechRecognition();
+  recognition.interimResults = true;
+
+  let p = document.createElement('p');
+  p.textContent = "...";
+  const words = document.querySelector('.words');
+  words.appendChild(p);
+
+  recognition.addEventListener('result', e => {
+    const transcript = Array.from(e.results[0])
+      // .map(result => result[0])
+      .map(result => result.transcript)
+      .join('');
+
+    const poopScript = transcript.replace(/poop|poo|shit|dump/gi, '💩');
+    p.textContent = transcript;
+    p.classList.remove('empty');
+
+    if (e.results[0].isFinal) {
+      p = document.createElement('p');
+      p.classList.add('empty');
+      words.appendChild(p);
+    }
+  });
+
+  recognition.addEventListener('end', recognition.start);
+
+  recognition.start();
+
 
 </script>
 
@@ -41,7 +70,12 @@
       line-height:3rem;
     }
     p {
-      margin: 0 0 3rem 0;
+      margin: 3rem 0 0 0;
+      /*margin: 0 0 3rem 0;*/
+    }
+
+    p:first-of-type, p.empty {
+      margin: 0;
     }
 
     .words:before {

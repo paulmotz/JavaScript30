@@ -92,11 +92,11 @@ Completed
 
 ## 19 - Webcam Fun
 
-To be completed
+Completed, added green and blue effects
 
 ## 20 - Speech Detection
 
-To be completed
+Made changes to styling so that there is not a blank line after the most recent text.
 
 ## 21 - Geolocation
 
@@ -104,7 +104,7 @@ To be completed
 
 ## 22 - Follow Along Link Highlighter
 
-To be completed
+Added a fade in effect for the first link highlighted. In solution, bubble transitions in from top left which is not a link location.
 
 ## 23 - Speech Synthesis
 
